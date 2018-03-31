@@ -21,3 +21,6 @@ var Article = new Schema({
 });
 
 // I think i need to add methods or fields here so that it can be on the saved or unsaved list
+
+// do the mongoose make a model thing
+// export it
