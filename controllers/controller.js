@@ -24,10 +24,13 @@ app.get("/scrape", function (req, res) {
 
         $("h1.entry-title").each(function (i, element) {
 
-            var title = $(element).text();
-            var link = $(element).children().attr("href");
+            // I think the articleModel needs to get used here?
+            // create a new articleModel, and then push that to the results, then insert the results
+            var headline = $(element).text();
+            var summary = ;
+            var url = $(element).children().attr("href");
             results.push({
-                title, link
+                headline, summary, url
             });
             db.scrapeData.insert(results);
             res.json(results);
