@@ -37,11 +37,12 @@ app.get("/scrape", function (req, res) {
             // create a new articleModel, and then push that to the results, then insert the results
             // var article = new Article
 
-            var title = $(element).children("h1.lh-condensed").text();
-            var link = $(element).children("h1.lh-condensed").children().attr("href");
+            var title = $(element).children("h1.lh-condensed").text().trim();
+            var link = "https://blog.github.com" + $(element).children("h1.lh-condensed").children().attr("href");
+            var summary = $(element).children("div.content").children("p").text().split(".", 1).toString();
 
             results.push({
-                title, link
+                title, link, summary
             });
 
             // db.scrapeData.insert(results);
