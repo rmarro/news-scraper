@@ -24,31 +24,33 @@ app.get("/", function (req, res) {
     res.send("Hello world");
 });
 
+// Scrape route (get all articles from github blog)
 app.get("/scrape", function (req, res) {
+
+    // Get the body of the html with request
     request("https://blog.github.com/", function (error, response, html) {
 
         var $ = cheerio.load(html);
-        var results = [];
-
 
         $("div.mb-5").each(function (i, element) {
+            // Add the title, link, and summary to a new result object
+            var result = {};
+            result.title = $(element).children("h1.lh-condensed").text().trim();
+            result.link = "https://blog.github.com" + $(element).children("h1.lh-condensed").children().attr("href");
+            result.summary = $(element).children("div.content").children("p").text().split(".", 1).toString();
+            result.saved = false;
 
-            // I think the articleModel needs to get used here?
-            // create a new articleModel, and then push that to the results, then insert the results
-            // var article = new Article
-
-            var title = $(element).children("h1.lh-condensed").text().trim();
-            var link = "https://blog.github.com" + $(element).children("h1.lh-condensed").children().attr("href");
-            var summary = $(element).children("div.content").children("p").text().split(".", 1).toString();
-
-            results.push({
-                title, link, summary
-            });
-
-            // db.scrapeData.insert(results);
+            // Create a new Article with the result object made above
+            db.Article.create(result)
+                .then(function(dbArticle) {
+                    console.log(dbArticle);
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
         });
-        res.json(results);
     });
+    res.send("Scrape Complete")
 });
 
 

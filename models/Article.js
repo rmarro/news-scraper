@@ -6,7 +6,6 @@ var ArticleSchema = new Schema({
         type: String,
         required: true,
         // Trying to avoid pushing articles that already exist when scraping. But what will happen if it tries to add a bunch and some already exist? will only the missing ones get added, or will the whole thing result in an error??
-        unique: true
     },
     link: {
         type: String,
