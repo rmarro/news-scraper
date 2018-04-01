@@ -53,6 +53,29 @@ app.get("/scrape", function (req, res) {
     res.send("Scrape Complete")
 });
 
+// Route for getting all Articles from the db
+app.get("/articles", function (req, res) {
+    db.Article.find({})
+        .then(function (dbArticle) {
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
+});
+
+// Post route for submitting a comment and associating it with an article
+
+// get route for grabbing article by id and populating with all comments
+
+// put route for updating article to saved
+
+// put route for updating article to unsaved
+
+// delete route for removing a comment from article (is this also put route to update article commment array to remove that??)
+
+
+
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
