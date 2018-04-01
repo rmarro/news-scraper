@@ -1,3 +1,9 @@
+// ***** ISSUES *****
+// When scrape button is clicked, page does not reload with new results
+// When get request made at /scrape, need to check if already in db
+
+
+
 // Dependencies
 var express = require("express");
 var mongojs = require("mongojs");
@@ -5,6 +11,7 @@ var mongoose = require("mongoose");
 var request = require("request");
 var cheerio = require("cheerio");
 var bodyParser = require("body-parser");
+var exphbs = require("express-handlebars");
 
 // Require all models
 var db = require("./models");
@@ -13,6 +20,11 @@ var db = require("./models");
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+app.use(express.static("public"));
 
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
@@ -23,10 +35,6 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
-// Main route (simple Hello World Message)
-app.get("/", function (req, res) {
-    res.send("Hello world");
-});
 
 // Scrape route (get all articles from github blog)
 app.get("/scrape", function (req, res) {
@@ -46,27 +54,39 @@ app.get("/scrape", function (req, res) {
 
             // Create a new Article with the result object made above
             db.Article.create(result)
-                .then(function(dbArticle) {
-                    console.log(dbArticle);
-                })
-                .catch(function(err) {
-                    console.log(err);
-                });
+            .then(function(dbArticle) {
+                console.log(dbArticle);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
         });
     });
-    res.send("Scrape Complete")
+    res.send("Scrape Complete");
 });
 
 // Route for getting all Articles from the db
-app.get("/articles", function (req, res) {
+app.get("/", function (req, res) {
     db.Article.find({})
-        .then(function (dbArticle) {
-            res.json(dbArticle);
-        })
-        .catch(function (err) {
-            res.json(err);
-        });
+    .then(function (dbArticle) {
+        res.render("index", { article: dbArticle});
+    })
+    .catch(function (err) {
+        console.log(err);
+        res.json(err);
+    });
 });
+
+// Route for getting Articles marked as saved from db
+app.get("/saved", function(req, res) {
+    db.Article.find({ saved: true})
+    .then(function(dbArticle) {
+        res.json(dbArticle);
+    })
+    .catch(function (err) {
+        res.json(err);
+    });
+})
 
 // Route for creating a note and associating it with an article
 app.post("/articles/:id", function(req, res) {
@@ -83,12 +103,12 @@ app.post("/articles/:id", function(req, res) {
     });
 })
 
-// Route for getting article by id and populating with all notes
+// Route for getting article by id and populating all notes
 app.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id})
     .populate("notes")
     .then(function(dbArticle) {
-        res.json(dbArticle);
+        res.render("modal", { note: dbArticle});
     })
     .catch(function(err) {
         res.json(err);

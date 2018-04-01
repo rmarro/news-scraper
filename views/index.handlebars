@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Get GitHub News</h1>
+        <p>Scrape the latest posts from GitHub's Blog</p>
+        <p>
+            <a class="btn btn-primary btn-lg scrape-btn" role="button">Scrape</a>
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    {{#each article}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a target="_blank" href={{this.link}}><h3 class="panel-title">{{this.title}}</h3></a>
+                </div>
+                <div class="panel-body">
+                    {{this.summary}}
+                </div>
+                <button type="button" class="btn btn-default view-comments">View comments</button>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+{{> modal}}
