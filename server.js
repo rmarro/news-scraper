@@ -4,12 +4,16 @@ var mongojs = require("mongojs");
 var mongoose = require("mongoose");
 var request = require("request");
 var cheerio = require("cheerio");
+var bodyParser = require("body-parser");
 
 // Require all models
 var db = require("./models");
 
 // Initialize Express
 var app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
@@ -64,9 +68,32 @@ app.get("/articles", function (req, res) {
         });
 });
 
-// Post route for submitting a comment and associating it with an article
+// Route for creating a note and associating it with an article
+app.post("/articles/:id", function(req, res) {
+    db.Note.create(req.body)
+    .then(function(dbNote) {
+        // If a Note was created successfully, find one Article and push the new Note's _id to the Article's `notes` array
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { notes: dbNote._id }}, {new: true});
+    })
+    .then(function(dbArticle) {
+        res.json(dbArticle);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+})
 
-// get route for grabbing article by id and populating with all comments
+// Route for getting article by id and populating with all notes
+app.get("/articles/:id", function(req, res) {
+    db.Article.findOne({ _id: req.params.id})
+    .populate("notes")
+    .then(function(dbArticle) {
+        res.json(dbArticle);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+})
 
 // put route for updating article to saved
 

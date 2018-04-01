@@ -18,14 +18,13 @@ var ArticleSchema = new Schema({
     saved: {
         type: Boolean,
     },
-    // Figure out how to be able to push multiple notes to the array
-    notes: []
-    // This is to just associate one with the article:
-    // note: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Note"
-    //   }
-
+    // Store ObjectIds in the array, which refer to the Note model
+    notes: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Note"
+        }
+    ]
 });
 
 var Article = mongoose.model("Article", ArticleSchema);
