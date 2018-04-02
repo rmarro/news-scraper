@@ -86,7 +86,7 @@ app.get("/saved", function(req, res) {
     .catch(function (err) {
         res.json(err);
     });
-})
+});
 
 // Route for creating a note and associating it with an article
 app.post("/articles/:id", function(req, res) {
@@ -101,7 +101,7 @@ app.post("/articles/:id", function(req, res) {
     .catch(function(err) {
         res.json(err);
     });
-})
+});
 
 // Route for getting article by id and populating all notes
 app.get("/articles/:id", function(req, res) {
@@ -114,11 +114,32 @@ app.get("/articles/:id", function(req, res) {
     .catch(function(err) {
         res.json(err);
     });
-})
+});
 
-// put route for updating article to saved
+// Route for changing article to saved
+app.post("/articles/save/:id", function(req, res) {
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }, {new: true})
+    .then(function(dbArticle) {
+        res.json(dbArticle);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+});
 
-// put route for updating article to unsaved
+
+
+// Route for updating article to unsaved
+app.post("/articles/unsave/:id", function(req, res) {
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: false }, {new: true})
+    .then(function(dbArticle) {
+        res.json(dbArticle);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+});
+
 
 // delete route for removing a comment from article (is this also put route to update article commment array to remove that??)
 
