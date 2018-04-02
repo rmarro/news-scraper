@@ -9,6 +9,11 @@ $(".scrape-btn").on("click", function() {
 });
 
 $(document).on("click", ".view-comments", function() {
-    console.log("comments button clicked");
-    $(".comments-modal").modal("show");
+    $.ajax({
+        method: "GET",
+        url: `/articles/${$(this).attr("data-id")}`
+    }).then(function(notes) {
+        console.log(notes)
+        // $(".comments-modal").modal("show");
+    })
 })

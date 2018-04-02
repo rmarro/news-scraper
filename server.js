@@ -108,7 +108,8 @@ app.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id})
     .populate("notes")
     .then(function(dbArticle) {
-        res.render("modal", { note: dbArticle});
+        res.json(dbArticle.notes)        
+        // res.render("partials/modal", { note: dbArticle.notes});
     })
     .catch(function(err) {
         res.json(err);
