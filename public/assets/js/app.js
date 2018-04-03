@@ -16,4 +16,24 @@ $(document).on("click", ".view-comments", function() {
         console.log(notes)
         // $(".comments-modal").modal("show");
     })
+});
+
+$(document).on("click", ".save-article", function() {
+    $.ajax({
+        method: "POST",
+        url: `/articles/save/${$(this).attr("data-id")}`
+    }).then(function() {
+        alert("Article saved!")
+        // $(".comments-modal").modal("show");
+    })
+});
+
+$(document).on("click", ".unsave-article", function() {
+    $.ajax({
+        method: "POST",
+        url: `/articles/unsave/${$(this).attr("data-id")}`
+    }).then(function() {
+        alert("Article unsaved!")
+        // $(".comments-modal").modal("show");
+    })
 })

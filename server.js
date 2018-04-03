@@ -81,7 +81,7 @@ app.get("/", function (req, res) {
 app.get("/saved", function(req, res) {
     db.Article.find({ saved: true})
     .then(function(dbArticle) {
-        res.json(dbArticle);
+        res.render("saved", {article: dbArticle});
     })
     .catch(function (err) {
         res.json(err);
