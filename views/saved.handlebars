@@ -1,4 +1,16 @@
 <div class="container">
+    <div class="jumbotron">
+        <h1>Get GitHub News</h1>
+        <p>Saved Articles</p>
+        <p>
+            <a class="btn btn-primary btn-lg saved-btn" role="button" href="/">Home</a>
+        </p>
+        
+    </div>
+</div>
+
+
+<div class="container">
     {{#each article}}
     <div class="row">
         <div class="col-md-12">
@@ -8,8 +20,11 @@
                 </div>
                 <div class="panel-body">
                     {{this.summary}}
+                <button type="button" class="btn btn-default pull-right unsave-article" data-id={{id}}>Unsave Article</button>
+                <div>
+                    <a type="button" class="btn btn-default view-comments" data-id={{id}} href="/articles/{{id}}">Go to comments</a>
                 </div>
-                <button type="button" class="btn btn-default unsave-article" data-id={{id}}>Unsave Article</button>
+                </div>
             </div>
         </div>
     </div>

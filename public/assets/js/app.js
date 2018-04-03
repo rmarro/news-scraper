@@ -8,32 +8,34 @@ $(".scrape-btn").on("click", function() {
     })
 });
 
-$(document).on("click", ".view-comments", function() {
-    $.ajax({
-        method: "GET",
-        url: `/articles/${$(this).attr("data-id")}`
-    }).then(function(notes) {
-        console.log(notes)
-        // $(".comments-modal").modal("show");
-    })
-});
+// $(document).on("click", ".view-comments", function() {
+//     $.ajax({
+//         method: "GET",
+//         url: `/articles/${$(this).attr("data-id")}`
+//     }).then(function(notes) {
+//         console.log(notes)
+//         // $(".comments-modal").modal("show");
+//     })
+// });
 
+// Save article button
 $(document).on("click", ".save-article", function() {
     $.ajax({
         method: "POST",
         url: `/articles/save/${$(this).attr("data-id")}`
     }).then(function() {
-        alert("Article saved!")
-        // $(".comments-modal").modal("show");
+        alert("Article saved!");
+        location.reload();
     })
 });
 
+// Unsave article button
 $(document).on("click", ".unsave-article", function() {
     $.ajax({
         method: "POST",
         url: `/articles/unsave/${$(this).attr("data-id")}`
     }).then(function() {
-        alert("Article unsaved!")
-        // $(".comments-modal").modal("show");
+        alert("Article unsaved!");
+        location.reload();
     })
-})
+});

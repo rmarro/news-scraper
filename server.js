@@ -109,7 +109,6 @@ app.get("/articles/:id", function(req, res) {
     .populate("notes")
     .then(function(dbArticle) {
         res.json(dbArticle.notes)        
-        // res.render("partials/modal", { note: dbArticle.notes});
     })
     .catch(function(err) {
         res.json(err);

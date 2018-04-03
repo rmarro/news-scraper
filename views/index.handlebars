@@ -4,7 +4,9 @@
         <p>Scrape the latest posts from GitHub's Blog</p>
         <p>
             <a class="btn btn-primary btn-lg scrape-btn" role="button">Scrape</a>
+            <a class="btn btn-primary btn-lg saved-btn" role="button" href="/saved">Saved Articles</a>
         </p>
+        
     </div>
 </div>
 
@@ -18,8 +20,8 @@
                 </div>
                 <div class="panel-body">
                     {{this.summary}}
+                    <button type="button" class="btn btn-default pull-right save-article" data-id={{id}}>Save Article</button>
                 </div>
-                <button type="button" class="btn btn-default save-article" data-id={{id}}>Save Article</button>
             </div>
         </div>
     </div>
