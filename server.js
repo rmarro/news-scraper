@@ -108,7 +108,8 @@ app.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id})
     .populate("notes")
     .then(function(dbArticle) {
-        res.json(dbArticle.notes)        
+        res.render("article", {note: dbArticle.notes})
+        // res.json(dbArticle.notes)        
     })
     .catch(function(err) {
         res.json(err);
