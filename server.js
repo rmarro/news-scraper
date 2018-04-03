@@ -108,8 +108,7 @@ app.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id})
     .populate("notes")
     .then(function(dbArticle) {
-        res.render("article", {note: dbArticle.notes})
-        // res.json(dbArticle.notes)        
+        res.render("article", {note: dbArticle.notes, article: dbArticle})
     })
     .catch(function(err) {
         res.json(err);
@@ -127,8 +126,6 @@ app.post("/articles/save/:id", function(req, res) {
     });
 });
 
-
-
 // Route for updating article to unsaved
 app.post("/articles/unsave/:id", function(req, res) {
     db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: false }, {new: true})
@@ -141,7 +138,7 @@ app.post("/articles/unsave/:id", function(req, res) {
 });
 
 
-// delete route for removing a comment from article (is this also put route to update article commment array to remove that??)
+// delete route for removing a comment from article (is this also a route to update article commment array to remove that??)
 
 
 

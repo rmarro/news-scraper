@@ -8,15 +8,6 @@ $(".scrape-btn").on("click", function() {
     })
 });
 
-// $(document).on("click", ".view-comments", function() {
-//     $.ajax({
-//         method: "GET",
-//         url: `/articles/${$(this).attr("data-id")}`
-//     }).then(function(notes) {
-//         console.log(notes)
-//         // $(".comments-modal").modal("show");
-//     })
-// });
 
 // Save article button
 $(document).on("click", ".save-article", function() {
@@ -39,3 +30,34 @@ $(document).on("click", ".unsave-article", function() {
         location.reload();
     })
 });
+
+// Submit comment button
+$(document).on("click", "#submit-comment", function() {
+    event.preventDefault();
+    var newNote = {
+        body: $("#commentBox").val().trim()
+    };
+
+    $.ajax({
+        method: "POST",
+        url: `/articles/${$(this).attr("data-id")}`,
+        data: newNote
+    }).then(function() {
+        alert("Comment added!");
+        location.reload();
+    })
+});
+
+
+
+
+
+// $(document).on("click", ".view-comments", function() {
+//     $.ajax({
+//         method: "GET",
+//         url: `/articles/${$(this).attr("data-id")}`
+//     }).then(function(notes) {
+//         console.log(notes)
+//         // $(".comments-modal").modal("show");
+//     })
+// });
