@@ -50,8 +50,7 @@ $(document).on("click", "#submit-comment", function() {
 
 
 
-
-
+// MODAL NOT WORKING, SWITCHED TO SEPARATE PAGES
 // $(document).on("click", ".view-comments", function() {
 //     $.ajax({
 //         method: "GET",
