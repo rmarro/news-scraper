@@ -12,6 +12,20 @@
 
 <div class="container">
 
+    {{!-- Render the article info --}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a target="_blank" href={{article.link}}><h3 class="panel-title">{{article.title}}</h3></a>
+                </div>
+                <div class="panel-body">
+                    {{article.summary}}                  
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{!-- Render each note --}}
     {{#each note}}
     <div class="row">
