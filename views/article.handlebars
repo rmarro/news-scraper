@@ -43,13 +43,17 @@
     {{!-- form to add comment --}}
     <div class="row">
         <div class="col-md-6">
-            <form>
-                <div class="form-group">
-                    <label for="commentBox">Add a comment</label>
-                    <textarea class="form-control" rows="3" id="commentBox" placeholder="Text input"></textarea>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="commentBox">Add a comment</label>
+                            <textarea class="form-control" rows="3" id="commentBox" placeholder="Text input"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-default" id="submit-comment" data-id={{article.id}}>Submit</button>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-default" id="submit-comment" data-id={{article.id}}>Submit</button>
-            </form>
+            </div>
         </div>
     </div>
 
