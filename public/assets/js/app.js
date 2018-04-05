@@ -15,7 +15,6 @@ $(document).on("click", ".save-article", function() {
         method: "POST",
         url: `/articles/save/${$(this).attr("data-id")}`
     }).then(function() {
-        alert("Article saved!");
         location.reload();
     })
 });
@@ -26,7 +25,6 @@ $(document).on("click", ".unsave-article", function() {
         method: "POST",
         url: `/articles/unsave/${$(this).attr("data-id")}`
     }).then(function() {
-        alert("Article unsaved!");
         location.reload();
     })
 });
@@ -43,7 +41,6 @@ $(document).on("click", "#submit-comment", function() {
         url: `/articles/${$(this).attr("data-id")}`,
         data: newNote
     }).then(function() {
-        alert("Comment added!");
         location.reload();
     })
 });
@@ -55,13 +52,14 @@ $(document).on("click", ".delete-comment", function() {
         // Grab the article id from the panel title and the note id from the delete button
         url: `/articles/${$(".panel-title").attr("data-id")}/${$(this).attr("data-noteid")}`
     }).then(function() {
-        alert("Comment deleted!");
         location.reload();
     })
 })
 
 
+// **********************************************
 // MODAL NOT WORKING, SWITCHED TO SEPARATE PAGES
+// SAVE INCASE REVISIT THIS
 // $(document).on("click", ".view-comments", function() {
 //     $.ajax({
 //         method: "GET",

@@ -3,6 +3,9 @@
 //ones that aren't, and reload page
 // When save article button is clicked, need to make those articles with unsave buttons (handlebars unless???)
 // Need to separate out routers/controllers... EVERYTHING is in server right now :(
+// If there are no saved articles or no saved comments, display a message (if handlebars object is empty???)
+// Put the add a comment box in its own panel
+// Update style and layout so it's slightly less crappy
 
 
 
