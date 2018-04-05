@@ -1,6 +1,8 @@
 // ***** ISSUES *****
-// When scrape button is clicked, page does not reload with new results
-// When get request made at /scrape, need to check if already in db
+// When get request made at /scrape, need to check if already in db, only add
+//ones that aren't, and reload page
+// When save article button is clicked, need to make those articles with unsave buttons (handlebars unless???)
+// Need to separate out routers/controllers... EVERYTHING is in server right now :(
 
 
 
@@ -137,8 +139,23 @@ app.post("/articles/unsave/:id", function(req, res) {
     });
 });
 
-// delete route for removing a comment from article (is this also a route to update article commment array to remove that??)
-app.delete("/articles/:id")
+// delete route for removing a comment from article
+app.delete("/articles/:id/:noteid", function(req, res) {
+
+    db.Note.findOneAndRemove({_id: req.params.noteid}, function(err) {
+        if (err) {
+            res.send(err);
+        } else {
+            db.Article.findOneAndUpdate({_id: req.params.id}, {$pull: {notes: req.params.noteid}})
+            .then(function() {
+                res.send("article updated")
+            })
+            .catch(function(err) {
+                res.json(err)
+            })
+        }
+    })
+});
 
 
 

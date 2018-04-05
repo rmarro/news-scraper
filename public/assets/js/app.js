@@ -48,6 +48,17 @@ $(document).on("click", "#submit-comment", function() {
     })
 });
 
+// Delete comment button
+$(document).on("click", ".delete-comment", function() {
+    $.ajax({
+        method: "DELETE",
+        // Grab the article id from the panel title and the note id from the delete button
+        url: `/articles/${$(".panel-title").attr("data-id")}/${$(this).attr("data-noteid")}`
+    }).then(function() {
+        alert("Comment deleted!");
+        location.reload();
+    })
+})
 
 
 // MODAL NOT WORKING, SWITCHED TO SEPARATE PAGES

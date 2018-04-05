@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a target="_blank" href={{article.link}}><h3 class="panel-title">{{article.title}}</h3></a>
+                    <a target="_blank" href={{article.link}}><h3 class="panel-title" data-id={{article.id}}>{{article.title}}</h3></a>
                 </div>
                 <div class="panel-body">
                     {{article.summary}}                  
@@ -33,7 +33,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     {{this.body}}
-                <button type="button" class="btn btn-default pull-right delete-comment" data-id={{id}}>Delete Comment</button>
+                <button type="button" class="btn btn-default pull-right delete-comment" data-noteid={{this.id}}>Delete Comment</button>
                 </div>
             </div>
         </div>
