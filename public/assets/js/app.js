@@ -2,7 +2,7 @@
 $(".scrape-btn").on("click", function() {
     $.ajax({
         method: "GET",
-        url: "/scrape"
+        url: "articles/scrape"
     }).then(function() {
         location.reload();
     })
@@ -19,6 +19,7 @@ $(document).on("click", ".save-article", function() {
     })
 });
 
+
 // Unsave article button
 $(document).on("click", ".unsave-article", function() {
     $.ajax({
@@ -29,13 +30,13 @@ $(document).on("click", ".unsave-article", function() {
     })
 });
 
+
 // Submit comment button
 $(document).on("click", "#submit-comment", function() {
     event.preventDefault();
     var newNote = {
         body: $("#commentBox").val().trim()
     };
-
     $.ajax({
         method: "POST",
         url: `/articles/${$(this).attr("data-id")}`,
@@ -44,6 +45,7 @@ $(document).on("click", "#submit-comment", function() {
         location.reload();
     })
 });
+
 
 // Delete comment button
 $(document).on("click", ".delete-comment", function() {
