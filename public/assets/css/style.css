@@ -1,3 +1,21 @@
 .panel-title {
-    font-size: 20px;
+    font-size: 22px;
+}
+
+.panel-body {
+    font-size: 18px;
+    color: #2B3E50;
+}
+
+label {
+    font-size: 18px;
+}
+
+#commentBox {
+    font-size: 15px;
+}
+
+.btn-primary, .btn-secondary {
+    font-size: 14px;
+    margin: 3px;
 }
