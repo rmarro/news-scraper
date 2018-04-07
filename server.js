@@ -1,8 +1,8 @@
-// ***** ISSUES *****
+// ***** ISSUES & TO DO*****
 // When get request made at /scrape, need to check if already in db, only add
 //ones that aren't, and reload page
-// When save article button is clicked, need to make those articles with unsave buttons (handlebars unless???)
-// If there are no saved articles or no saved comments, display a message (if handlebars object is empty???)
+// When save article button is clicked, need to make those articles with unsave buttons
+// If there are no saved articles or no saved comments, display a message
 
 
 // Dependencies
