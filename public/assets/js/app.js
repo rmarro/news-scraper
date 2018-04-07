@@ -2,7 +2,7 @@
 $(".scrape-btn").on("click", function() {
     $.ajax({
         method: "GET",
-        url: "/scrape"
+        url: "articles/scrape"
     }).then(function() {
         location.reload();
     })
@@ -35,13 +35,12 @@ $(document).on("click", "#submit-comment", function() {
     var newNote = {
         body: $("#commentBox").val().trim()
     };
-
     $.ajax({
         method: "POST",
         url: `/articles/${$(this).attr("data-id")}`,
         data: newNote
     }).then(function() {
-        location.reload();
+        // location.reload();
     })
 });
 
