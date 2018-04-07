@@ -3,13 +3,6 @@ var db = require("../models");
 
 var request = require("request");
 var cheerio = require("cheerio");
-var bodyParser = require("body-parser");
-bodyParser.urlencoded({ extended: true });
-
-//adding
-var mongoose = require("mongoose");
-mongoose.Promise = Promise;
-
 
 
 module.exports = {
@@ -67,15 +60,14 @@ module.exports = {
 
     // Creating a note and associating it with an article
     createNote: function(req, res) {
-        console.log(req.body);
         db.Note.create(req.body)
         .then(function(dbNote) {
             // If a Note was created successfully, find one Article and push the new Note's _id to the Article's `notes` array
             return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { notes: dbNote._id }}, {new: true});
         })
-        // .then(function(dbArticle) {
-        //     res.json(dbArticle);
-        // })
+        .then(function(dbArticle) {
+            res.json(dbArticle);
+        })
         .catch(function(err) {
             res.json(err);
         });

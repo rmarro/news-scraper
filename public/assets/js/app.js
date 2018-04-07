@@ -19,6 +19,7 @@ $(document).on("click", ".save-article", function() {
     })
 });
 
+
 // Unsave article button
 $(document).on("click", ".unsave-article", function() {
     $.ajax({
@@ -28,6 +29,7 @@ $(document).on("click", ".unsave-article", function() {
         location.reload();
     })
 });
+
 
 // Submit comment button
 $(document).on("click", "#submit-comment", function() {
@@ -40,9 +42,10 @@ $(document).on("click", "#submit-comment", function() {
         url: `/articles/${$(this).attr("data-id")}`,
         data: newNote
     }).then(function() {
-        // location.reload();
+        location.reload();
     })
 });
+
 
 // Delete comment button
 $(document).on("click", ".delete-comment", function() {
